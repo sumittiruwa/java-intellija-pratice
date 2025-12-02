@@ -13,22 +13,22 @@ public class College {
         String password = "";
 
         try {
-            // Load MySQL JDBC Driver
+
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Connect to database
+
             Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("✅ Connected to college_db!\n");
+            System.out.println(" Connected to college_db!\n");
 
             // 1️⃣ Create Table
-            System.out.println("🔹 Creating Student table (if not exists)...");
+            System.out.println(" Creating Student table (if not exists)...");
             Statement st = connection.createStatement();
             String createTable = "CREATE TABLE IF NOT EXISTS Student (" +
                     "Id INT PRIMARY KEY, " +
                     "Name VARCHAR(50), " +
                     "Age INT)";
             st.executeUpdate(createTable);
-            System.out.println("✅ Student table ready!\n");
+            System.out.println(" Student table ready!\n");
 
             // 2️⃣ Insert 5 students
             System.out.println("🔹 Inserting 5 students...");
@@ -36,11 +36,11 @@ public class College {
             PreparedStatement pstInsert = connection.prepareStatement(insertSQL);
 
             String[][] students = {
-                    {"1", "John", "20"},
-                    {"2", "Alice", "21"},
-                    {"3", "Bob", "22"},
-                    {"4", "Emma", "23"},
-                    {"5", "David", "24"}
+                    {"1", "Nani", "20"},
+                    {"2", "dustin", "21"},
+                    {"3", "Naruto", "22"},
+                    {"4", "pallavi", "23"},
+                    {"5", "Tyler Durden", "24"}
             };
 
             for (String[] s : students) {
@@ -52,14 +52,14 @@ public class College {
             }
             System.out.println();
 
-            // 3️⃣ Update a student
-            System.out.println("🔹 Updating student John age to 22...");
+            // 3️ Update a student
+            System.out.println(" Updating student Nani age to 22...");
             String updateSQL = "UPDATE Student SET Age = ? WHERE Id = ?";
             PreparedStatement pstUpdate = connection.prepareStatement(updateSQL);
             pstUpdate.setInt(1, 22);
             pstUpdate.setInt(2, 1);
             pstUpdate.executeUpdate();
-            System.out.println("✅ Updated student John!\n");
+            System.out.println("✅ Updated student Nani!\n");
 
             // 4️⃣ Retrieve all students
             System.out.println("🔹 Retrieving all students:");
@@ -102,10 +102,10 @@ public class College {
                 pstDelete.executeUpdate();
                 System.out.println("Deleted student with Id: " + i);
             }
-            System.out.println("\n✅ All students deleted!");
+            System.out.println("\n All students deleted!");
 
             connection.close();
-            System.out.println("\n✅ Database connection closed.");
+            System.out.println("\n Database connection closed.");
 
         } catch (Exception e) {
             System.out.println(e);
